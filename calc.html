@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculater</title>
+	<link rel="stylesheet" type="text/css" href="calc.css">
+	<script type="text/javascript">
+		var opt = '';
+		var first = 0.00;
+		var second = 0.00;
+		var temp = '';
+		var result = null;
+		function operation(first , opt , second) {
+			if(opt == '*') {
+				mult = second*first;
+				return mult;
+			}
+			if(opt == '-') {
+				sub = first - second;
+				return sub;
+			}
+			if(opt == '+') {
+				add = first+second;
+				return add;
+			}
+			if(opt == '/') {
+				div = first/second;
+				return div;
+			}
+		}
+		function calc(a) {
+			if(opt != '') {
+				temp = a.value;
+				if((temp != '*') && (temp != '+') && (temp != '/') && (temp != '-')) {
+					if(document.getElementById('val').value == result && result != null) {
+						document.getElementById('val').value = '';
+						first = result;
+						result = 0.00;
+					}
+					document.getElementById('val').value += temp;
+					second=parseFloat(document.getElementById('val').value);
+				}
+				else {
+					if(second != 0) {
+						result = operation(first , opt , second);
+						if(result != null) {
+							document.getElementById('val').value = result;
+							second =0.00;
+							opt = temp;
+							temp ='';
+						}
+					}
+				}
+			}
+			else {
+				temp= a.value;
+				if(a.value != '*' && a.value != '+' && a.value != '/' && a.value != '-') {
+					document.getElementById('val').value += temp;
+					first=parseFloat(document.getElementById('val').value);
+				}
+				else{
+					opt = temp;
+					temp='';
+					document.getElementById('val').value='';
+				}
+			}
+		}
+		function resetValue() {
+			document.getElementById('val').value = '';
+			opt='';
+			first=0;
+			second=0;
+			temp ='';
+			result=null;
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<form>
+			<input type="text" id="val" name="text">
+				<table>
+				<tr>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="0"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="1"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="2"></td>
+					<td><input type="button" id="opt" name="btn" onclick=calc(this) value="*"></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="3"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="4"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="5"></td>
+					<td><input type="button" id="opt" name="btn" onclick=calc(this) value="+"></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="6"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="7"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="8"></td>
+					<td><input type="button" id="opt" name="btn" onclick=calc(this) value="-"></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="9"></td>
+					<td><input type="button" id="num" name="btn" onclick=calc(this) value="."></td>
+					<td><input type="button" id="clear" name="clear" onclick=resetValue() value="clear"></td>
+					<td><input type="button" id="opt" name="btn" onclick=calc(this) value="/"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
