@@ -5,8 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="calc.css">
 	<script type="text/javascript">
 		var opt = '';
-		var first = 0.00;
-		var second = 0.00;
+		var first = null;
+		var second = null;
 		var temp = '';
 		var result = null;
 		function operation(first , opt , second) {
@@ -34,17 +34,17 @@
 					if(document.getElementById('val').value == result && result != null) {
 						document.getElementById('val').value = '';
 						first = result;
-						result = 0.00;
+						result = null;
 					}
 					document.getElementById('val').value += temp;
 					second=parseFloat(document.getElementById('val').value);
 				}
 				else {
-					if(second != 0) {
+					if(second != null) {
 						result = operation(first , opt , second);
 						if(result != null) {
 							document.getElementById('val').value = result;
-							second =0.00;
+							second =null;
 							opt = temp;
 							temp ='';
 						}
@@ -67,8 +67,8 @@
 		function resetValue() {
 			document.getElementById('val').value = '';
 			opt='';
-			first=0;
-			second=0;
+			first=null;
+			second=null;
 			temp ='';
 			result=null;
 		}
